@@ -26,90 +26,182 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
-padding:16px 20px;
+height:70px;
+padding:9px 14px;
 display:flex;
 align-items:center;
 justify-content:space-between;
 z-index:1000;
-background:linear-gradient(to bottom,rgba(5,4,3,.42),rgba(5,4,3,.12));
-backdrop-filter:blur(8px);
+background:linear-gradient(to bottom,rgba(5,4,3,.72),rgba(5,4,3,.18),transparent);
+backdrop-filter:blur(6px);
 border-bottom:1px solid rgba(255,255,255,.03);
 }
 
 .brand{
 display:flex;
 align-items:center;
-gap:12px;
+gap:8px;
+flex-shrink:0;
+letter-spacing:.08em;
+text-decoration:none;
+color:inherit;
+cursor:pointer;
 }
 
-.brand img{
-width:42px;
-height:42px;
+.brand img,
+.crest{
+width:48px;
+height:48px;
 object-fit:contain;
+opacity:.96;
+filter:drop-shadow(0 2px 12px rgba(0,0,0,.35));
 }
 
 .brand-ja{
-font-size:18px;
-letter-spacing:.14em;
 font-family:"Noto Serif JP",serif;
+font-size:16px;
+line-height:1;
+letter-spacing:.1em;
+font-weight:300;
+text-shadow:0 2px 12px rgba(0,0,0,.35);
 }
 
 .brand-en{
-font-size:9px;
-letter-spacing:.34em;
-opacity:.62;
 margin-top:2px;
+font-family:"Cormorant Garamond",serif;
+font-size:7px;
+letter-spacing:.22em;
+font-weight:400;
+opacity:.92;
+}
+
+.header-actions{
+display:flex;
+align-items:center;
+gap:14px;
+position:relative;
+z-index:10001;
+}
+
+.instagram-link{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:36px;
+height:36px;
+text-decoration:none;
+}
+
+.instagram{
+display:inline-block;
+width:30px;
+height:30px;
+border:2px solid #fff;
+border-radius:8px;
+position:relative;
+transform:translateY(-1px);
+}
+
+.instagram::before{
+content:"";
+position:absolute;
+width:10px;
+height:10px;
+border:2px solid #fff;
+border-radius:50%;
+left:7px;
+top:7px;
+}
+
+.instagram::after{
+content:"";
+position:absolute;
+width:4px;
+height:4px;
+background:#fff;
+border-radius:50%;
+right:5px;
+top:5px;
 }
 
 .menu-btn{
-width:42px;
-height:42px;
+width:36px;
+height:36px;
 border:none;
-background:none;
+background:transparent;
 position:relative;
+cursor:pointer;
 }
 
 .menu-btn span{
 position:absolute;
-left:9px;
-width:24px;
+left:3px;
+width:30px;
 height:1px;
-background:#fff;
-transition:.4s;
+background:rgba(255,255,255,.92);
+transition:transform .35s ease, opacity .35s ease, top .35s ease;
 }
 
-.menu-btn span:nth-child(1){top:14px;}
-.menu-btn span:nth-child(2){top:21px;}
-.menu-btn span:nth-child(3){top:28px;}
+.menu-btn span:nth-child(1){top:8px;}
+.menu-btn span:nth-child(2){top:17px;}
+.menu-btn span:nth-child(3){top:26px;}
 
-.mobile-menu{
+.menu-btn.is-open span:nth-child(1){top:17px;transform:rotate(45deg);}
+.menu-btn.is-open span:nth-child(2){opacity:0;}
+.menu-btn.is-open span:nth-child(3){top:17px;transform:rotate(-45deg);}
+
+.mobile-nav{
 position:fixed;
 top:0;
-right:-100%;
-width:78%;
+right:0;
+width:78vw;
 height:100vh;
-padding:120px 34px 40px;
-background:rgba(8,6,5,.96);
-backdrop-filter:blur(20px);
+background:rgba(5,4,3,.96);
+backdrop-filter:blur(18px);
 display:flex;
 flex-direction:column;
-gap:28px;
-transition:right .45s ease;
-z-index:999;
+align-items:flex-start;
+justify-content:flex-start;
+padding:110px 32px 40px;
+gap:26px;
+z-index:9999;
+transform:translateX(100%);
+transition:transform .42s ease;
 }
 
-.mobile-menu.active{
-right:0;
+.mobile-nav.is-open{
+transform:translateX(0);
 }
 
-.mobile-menu a{
-color:#fff;
+.mobile-nav a{
+color:rgba(255,255,255,.92);
 text-decoration:none;
 font-size:15px;
-letter-spacing:.16em;
+letter-spacing:.14em;
 font-family:"Noto Serif JP",serif;
-padding-bottom:14px;
-border-bottom:1px solid rgba(255,255,255,.08);
+font-weight:300;
+line-height:1;
+}
+
+.mobile-nav a.active::after{
+content:"";
+display:block;
+width:100%;
+height:1px;
+margin-top:10px;
+background:rgba(255,255,255,.68);
+}
+
+.mobile-nav .nav-reserve-link{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:100%;
+height:54px;
+margin-top:6px;
+border:1px solid rgba(255,255,255,.26);
+background:rgba(255,255,255,.04);
+letter-spacing:.18em;
 }
 
 .hero{
@@ -369,27 +461,39 @@ border-top:1px solid rgba(255,255,255,.06);
 <body>
 
 <header>
-<a class="brand" href="https://acumoxzen-tech.github.io/kanjitsudo/" style="text-decoration:none;color:inherit;">
-<img src="https://res.cloudinary.com/dvr7rww8q/image/upload/v1779030104/ChatGPT_Image_2026%E5%B9%B45%E6%9C%8818%E6%97%A5_00_00_07_xy3xk1.png">
+<a class="brand" href="https://acumoxzen-tech.github.io/kanjitsudo/">
+<img class="crest" src="https://res.cloudinary.com/dvr7rww8q/image/upload/v1779030104/ChatGPT_Image_2026%E5%B9%B45%E6%9C%8818%E6%97%A5_00_00_07_xy3xk1.png" alt="還日堂ロゴ">
 <div>
 <div class="brand-ja">還日堂</div>
 <div class="brand-en">KANJITSUDŌ</div>
 </div>
 </a>
 
-<button class="menu-btn" id="menuBtn">
+<div class="header-actions">
+<a class="instagram-link" href="https://www.instagram.com/k__.z.__m/" aria-label="Instagram">
+<span class="instagram"></span>
+</a>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false">
 <span></span>
 <span></span>
 <span></span>
 </button>
-
-<div class="mobile-menu" id="mobileMenu">
-<a href="https://acumoxzen-tech.github.io/kanjitsudo/">ホーム</a>
-<a href="https://acumoxzen-tech.github.io/kanjitsudo-menu/menu.html">施術メニュー</a>
-<a href="https://acumoxzen-tech.github.io/kanjitsudo-faq/faq.html">よくあるご質問</a>
-<a href="https://acumoxzen-tech.github.io/kanjitsudo-reserve/reserve.html">ご予約</a>
-<a href="https://www.instagram.com/k__.z.__m/">Instagram</a>
 </div>
+
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/">ホーム</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/#about-page">当店について</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo-menu/menu.html">施術メニュー</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/#staff-page">スタッフ紹介</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/#gallery-page">店内紹介</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/#flow-page">ご利用の流れ</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo-faq/faq.html" class="active">よくあるご質問</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/#news-page">お知らせ</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/#access-page">アクセス</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo/#contact-page">お問い合わせ</a>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo-reserve/reserve.html" class="nav-reserve-link">ご予約はこちら</a>
+<a href="https://www.instagram.com/k__.z.__m/">Instagram</a>
+</nav>
 </header>
 
 <section class="hero">
@@ -775,10 +879,25 @@ openFirstFaq(target);
 });
 });
 const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
+const mobileNav = document.getElementById('mobileNav');
+const navLinks = mobileNav.querySelectorAll('a');
+
+function closeMenu(){
+menuBtn.classList.remove('is-open');
+mobileNav.classList.remove('is-open');
+menuBtn.setAttribute('aria-expanded','false');
+mobileNav.setAttribute('aria-hidden','true');
+}
 
 menuBtn.addEventListener('click', () => {
-mobileMenu.classList.toggle('active');
+const isOpen = mobileNav.classList.toggle('is-open');
+menuBtn.classList.toggle('is-open', isOpen);
+menuBtn.setAttribute('aria-expanded', String(isOpen));
+mobileNav.setAttribute('aria-hidden', String(!isOpen));
+});
+
+navLinks.forEach(link => {
+link.addEventListener('click', closeMenu);
 });
 </script>
 
