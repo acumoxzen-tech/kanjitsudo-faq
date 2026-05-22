@@ -75,24 +75,6 @@ font-weight:400;
 opacity:.92;
 }
 
-.header-actions{
-display:flex;
-align-items:center;
-justify-content:flex-end;
-gap:18px;
-height:44px;
-margin-left:auto;
-position:relative;
-z-index:10002;
-}
-
-.instagram-link{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-text-decoration:none;
-margin-top:8px;
-}
 
 .instagram{
 display:inline-block;
@@ -126,33 +108,55 @@ right:4px;
 top:4px;
 }
 
-.menu-btn{
-width:30px;
-height:30px;
-border:none;
+
+nav.mobile-nav{
+max-width:none;
+margin:0;
+padding:0;
+gap:12px;
+overflow:visible;
+display:flex;
+align-items:center;
+justify-content:flex-end;
+position:static;
+width:auto;
+height:auto;
+max-height:none;
 background:transparent;
-position:relative;
+backdrop-filter:none;
+border-left:none;
+transform:none;
+opacity:1;
+visibility:visible;
+transition:none;
+flex-direction:row;
+font-family:"Noto Serif JP",serif;
+}
+
+nav.mobile-nav > a:not([aria-label="Instagram"]),
+nav.mobile-nav .nav-dropdown,
+.nav-reserve-menu{
+display:none;
+}
+
+nav.mobile-nav::after{
+content:"☰";
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:36px;
+height:36px;
+font-size:30px;
+line-height:1;
+color:rgba(255,255,255,.92);
 cursor:pointer;
+position:relative;
+top:0;
+transform:translateY(-1px);
+pointer-events:none;
 }
 
-.menu-btn span{
-position:absolute;
-left:4px;
-width:22px;
-height:1px;
-background:rgba(255,255,255,.92);
-transition:transform .35s ease, opacity .35s ease, top .35s ease;
-}
-
-.menu-btn span:nth-child(1){top:7px;}
-.menu-btn span:nth-child(2){top:14px;}
-.menu-btn span:nth-child(3){top:21px;}
-
-.menu-btn.is-open span:nth-child(1){top:14px;transform:rotate(45deg);}
-.menu-btn.is-open span:nth-child(2){opacity:0;}
-.menu-btn.is-open span:nth-child(3){top:14px;transform:rotate(-45deg);}
-
-.mobile-nav{
+nav.mobile-nav.is-open{
 position:fixed;
 top:0;
 right:0;
@@ -164,56 +168,119 @@ display:flex;
 flex-direction:column;
 align-items:flex-start;
 justify-content:flex-start;
-padding:142px 42px 40px;
-gap:34px;
+padding:110px 32px 40px;
+gap:26px;
 z-index:9999;
-transform:translateX(100%);
-transition:transform .38s ease, opacity .38s ease;
 }
 
-.mobile-nav.is-open{
-transform:translateX(0);
+nav.mobile-nav.is-open::after{
+content:"×";
+font-size:36px;
+position:fixed;
+top:18px;
+right:18px;
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:10000;
 }
 
-.mobile-nav a{
-position:relative;
-color:rgba(255,255,255,.96);
-text-decoration:none;
+nav.mobile-nav.is-open > a,
+nav.mobile-nav.is-open .nav-dropdown{
+display:block;
 font-size:15px;
-letter-spacing:.12em;
-font-family:"Noto Serif JP",serif;
+letter-spacing:.14em;
+}
+
+nav.mobile-nav.is-open > a{
+color:rgba(255,255,255,.92);
+text-decoration:none;
+position:relative;
+padding:0 0 10px;
+line-height:1;
 font-weight:300;
-line-height:1.2;
-padding-bottom:10px;
+border:none;
+background:transparent;
+min-height:0;
+width:auto;
 }
 
-.mobile-nav a.active{
-opacity:1;
+nav.mobile-nav.is-open > a.active,
+nav.mobile-nav.is-open .nav-dropdown-menu a.active{
+color:rgba(255,255,255,.98);
 }
 
-.mobile-nav a.active::after{
+nav.mobile-nav.is-open > a.active::after,
+nav.mobile-nav.is-open .nav-dropdown-menu a.active::after{
 content:"";
 position:absolute;
 left:0;
 right:0;
-bottom:-10px;
+bottom:0;
 height:1px;
 background:rgba(214,177,112,.72);
 }
 
-.mobile-nav .nav-reserve-link{
+nav.mobile-nav.is-open > a.nav-reserve-menu{
 display:inline-flex;
 align-items:center;
 justify-content:center;
-width:258px;
-height:72px;
-margin-top:8px;
-border:1px solid rgba(214,177,112,.48);
-background:rgba(214,177,112,.08);
-color:rgba(255,255,255,.94);
+min-width:168px;
+height:44px;
+padding:0 22px;
+border:1px solid rgba(255,255,255,.22);
+background:rgba(255,255,255,.035);
+color:rgba(255,255,255,.92);
 font-size:13px;
-letter-spacing:.16em;
-border-radius:8px;
+letter-spacing:.14em;
+}
+
+.nav-dropdown-trigger{
+display:block;
+border:none;
+background:transparent;
+color:rgba(255,255,255,.92);
+font-family:"Noto Serif JP",serif;
+font-size:15px;
+letter-spacing:.14em;
+font-weight:300;
+padding:0 0 10px;
+cursor:pointer;
+}
+
+.nav-dropdown-menu{
+position:static;
+transform:none;
+min-width:0;
+padding:10px 0 0 18px;
+border:none;
+background:transparent;
+backdrop-filter:none;
+opacity:1;
+visibility:visible;
+box-shadow:none;
+}
+
+.nav-dropdown-menu a{
+display:block;
+position:relative;
+width:fit-content;
+padding:10px 0;
+font-size:13px;
+letter-spacing:.12em;
+color:rgba(255,255,255,.68);
+text-decoration:none;
+}
+
+nav.mobile-nav.is-open .insta-link{
+display:block;
+transform:none;
+}
+
+nav.mobile-nav.is-open .instagram{
+transform:none;
 }
 
 .hero{
@@ -481,31 +548,25 @@ border-top:1px solid rgba(255,255,255,.06);
 </div>
 </a>
 
-<div class="header-actions">
-<a class="instagram-link" href="https://www.instagram.com/k__.z.__m/" aria-label="Instagram">
-<span class="instagram"></span>
-</a>
-<button class="menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false">
-<span></span>
-<span></span>
-<span></span>
-</button>
-</div>
-
-<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+<nav class="mobile-nav" id="mobileNav" aria-label="主要ナビゲーション">
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#top">ホーム</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#about-page">当店について</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-menu/menu.html">施術メニュー</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#staff-page">スタッフ紹介</a>
+<div class="nav-dropdown">
+<button type="button" class="nav-dropdown-trigger">ご案内 ▾</button>
+<div class="nav-dropdown-menu">
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#gallery-page">店内紹介</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#flow-page">ご利用の流れ</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-faq/faq.html" class="active">よくあるご質問</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#news-page">お知らせ</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#access-page">アクセス</a>
 <a href="https://acumoxzen-tech.github.io/kanjitsudo-site/#contact-page">お問い合わせ</a>
-<a href="https://acumoxzen-tech.github.io/kanjitsudo-reserve/reserve.html" class="nav-reserve-link">ご予約はこちら</a>
-<a class="instagram-link" href="https://www.instagram.com/k__.z.__m/" aria-label="Instagram">
-<span class="instagram"></span>
+</div>
+</div>
+<a href="https://acumoxzen-tech.github.io/kanjitsudo-reserve/reserve.html" class="nav-reserve-menu">ご予約はこちら</a>
+<a class="insta-link" href="https://www.instagram.com/k__.z.__m/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+<span class="instagram" aria-hidden="true"></span>
 </a>
 </nav>
 </header>
@@ -915,38 +976,48 @@ closeFaqAnswers();
 openFirstFaq(target);
 });
 });
-const menuBtn = document.getElementById('menuBtn');
 const mobileNav = document.getElementById('mobileNav');
-const navLinks = mobileNav.querySelectorAll('a');
 
-function closeMenu(){
-menuBtn.classList.remove('is-open');
-mobileNav.classList.remove('is-open');
-menuBtn.setAttribute('aria-expanded','false');
-mobileNav.setAttribute('aria-hidden','true');
-}
-
-menuBtn.addEventListener('click', (e) => {
-e.stopPropagation();
-const isOpen = mobileNav.classList.toggle('is-open');
-menuBtn.classList.toggle('is-open', isOpen);
-menuBtn.setAttribute('aria-expanded', String(isOpen));
-mobileNav.setAttribute('aria-hidden', String(!isOpen));
-});
-
+if (mobileNav) {
 mobileNav.addEventListener('click', (e) => {
-e.stopPropagation();
-});
+const clickedInstagram = e.target.closest('[aria-label="Instagram"]');
+const clickedLink = e.target.closest('a');
 
-document.addEventListener('click', () => {
-if(mobileNav.classList.contains('is-open')){
-closeMenu();
+if (!mobileNav.classList.contains('is-open')) {
+if (!clickedInstagram) {
+mobileNav.classList.add('is-open');
+e.preventDefault();
+}
+} else {
+const clickX = e.clientX;
+const clickY = e.clientY;
+const isCloseButton = clickX > (window.innerWidth - 70) && clickY < 70;
+
+if (isCloseButton) {
+mobileNav.classList.remove('is-open');
+return;
+}
+
+if (clickedLink) {
+setTimeout(() => {
+mobileNav.classList.remove('is-open');
+}, 120);
+}
 }
 });
 
-navLinks.forEach(link => {
-link.addEventListener('click', closeMenu);
+document.addEventListener('click', (e) => {
+if (!mobileNav.classList.contains('is-open')) return;
+if (mobileNav.contains(e.target)) return;
+mobileNav.classList.remove('is-open');
 });
+
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') {
+mobileNav.classList.remove('is-open');
+}
+});
+}
 </script>
 
 </body>
